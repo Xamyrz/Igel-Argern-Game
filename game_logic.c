@@ -7,6 +7,7 @@
 
 #include "game_init.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void printLine();
 
@@ -74,8 +75,21 @@ void printLine(){
  *        players - the array of the players
  *        numPlayers - the number of players  
  */
-void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
-    // TO BE IMPLEMENTED
+void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers) {
+    int row;
+    struct token *token;
+
+    // Loop 4 times, once per token
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < numPlayers; j++) {
+            print_board(board);
+            printf("Player %d: In which row would you like to place a token? ", players[j].player_id);
+            scanf("%d", &row);
+            token = malloc(sizeof(token));
+            token->col = players[j].col;
+            board[row][0].stack = token;
+        }
+    }
 
 }
 
