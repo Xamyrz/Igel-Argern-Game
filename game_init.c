@@ -40,9 +40,31 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
  * Output: The number of players of the game
  */
 int initialize_players(player players[]){
-    
-    //YOU WILL NEED TO IMPLEMENT THIS FUNCTION IN THIS LAB
-        return 0;
+
+    int playernum;
+    printf("How many players are going to play? \n");
+    scanf("%d", &playernum);
+    while(playernum > 6 || playernum < 2){
+        printf("ERROR: You have entered more than 6 or less than 2 players. \n");
+        printf("How many players are going to play? \n");
+        scanf("%d", &playernum);
+    }
+
+    for(int i = 1; i<=playernum; i++) {
+        players[i].player_id = i;
+        printf("Please enter the colour for Player %d \n", players[i].player_id);
+        printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
+        int colour;
+        scanf("%d", &colour);
+        while(colour > 6 || colour < 1){
+            printf("ERROR: You have entered a non existant color id.");
+            printf("Please enter the colour for Player %d \n", players[i].player_id);
+            printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
+            scanf("%d", &colour);
+            players[i].col = colour - 1;
+        }
+    }
+        return playernum;
     }
     
    

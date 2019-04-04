@@ -23,25 +23,8 @@ enum stype{
 
 //colors of tokens
 enum color {
-    RED, BLU, GREEN, YELLOW, PINK, ORANGE
+    RED, BLUE, GREEN, YELLOW, PINK, ORANGE
 };
-
-//defines a token. 
-//Note each token can be associated with a color
-typedef struct token{
-   enum color col; 
-    
-}token;
-
-//Defines a square of the board.
-typedef struct square{
-    //A square can be a NORMAL or an OBSTACLE square
-     enum stype type;
-     //the stack of tokens that can be placed on the board square
-     token * stack;      
-}square;
-
-
 
 /*
  * You need to fill this data structure
@@ -49,9 +32,26 @@ typedef struct square{
  * such as a name and a color.
  */
 typedef struct player{
+    int player_id;
+    enum color col;
     
-    
-}player; 
+}player;
+
+//defines a token.
+//Note each token can be associated with a color
+typedef struct token{
+    enum color col;
+    struct player player;
+
+}token;
+
+//Defines a square of the board.
+typedef struct square{
+    //A square can be a NORMAL or an OBSTACLE square
+    enum stype type;
+    //the stack of tokens that can be placed on the board square
+    token * stack;
+}square;
 
 
 /*
