@@ -37,4 +37,6 @@ char* colour_to_string(enum color col);
 
 int dice_roll();
 
-void display_message(player player, char message);
+void display_message(player player, char message[]);
+
+void add_token_to_square(square *sq, token *tok);

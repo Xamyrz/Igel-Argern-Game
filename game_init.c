@@ -6,6 +6,7 @@
 
 
 #include "game_init.h"
+#include "game_logic.h"
 #include <stdio.h>
 
 
@@ -28,7 +29,6 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
                 board[i][j].type = NORMAL;
             }
             board[i][j].stack = NULL;
-            board[i][j].num_tokens = 0;
         }
     }
 }
@@ -63,7 +63,7 @@ int initialize_players(player players[]){
         players[i-1].player_id = i;
 
         //prompt a user to enter a colour
-        printf("Please enter the colour for Player %d \n", players[i-1].player_id);
+        display_message(players[i-1], "Please select a colour");
         printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
         int colour;
         scanf("%d", &colour);
@@ -71,8 +71,8 @@ int initialize_players(player players[]){
 
         //if the colour id is greater than 6 or less than 1 then display the error and prompt the user again.
         while(colour > 6 || colour < 1){
-            printf("ERROR: You have entered a non existant color id.");
-            printf("Please enter the colour for Player %d \n", players[i-1].player_id);
+            display_message(players[i-1], "You entered an invalid colour! Please try again.");
+            display_message(players[i-1], "Please select a colour");
             printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
             scanf("%d", &colour);
             players[i-1].col = colour - 1;

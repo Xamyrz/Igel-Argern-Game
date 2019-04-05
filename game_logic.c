@@ -96,12 +96,12 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < numPlayers; j++) {
             print_board(board);
-            display_message(players[i], "In which row would you like to place your token? \n");
+            display_message(players[j], "In which row would you like to place your token?");
             scanf("%d", &row);
             while(row > 5 || row <0){
                 print_board(board);
-                printf("ERROR: Invalid row \n");
-                printf("Player %d: In which row would you like to place a token? \n", players[j].player_id);
+                display_message(players[j], "Row number is out of bounds! Please try again.");
+                display_message(players[j], "In which row would you like to place your token?");
                 scanf("%d", &row);
             }
             token = malloc(sizeof(token));
@@ -133,8 +133,13 @@ int dice_roll(){
     return dice;
 }
 
-void display_message(player player, char message){
-    printf("Player %d %s: %s", player.player_id, colour_to_string(player.col), message);
+void display_message(player player, char message[]){
+    char *colour = colour_to_string(player.col);
+    if(colour == NULL) {
+        printf("Player %d: %s\n", player.player_id, message);
+    } else {
+        printf("Player %d [%s]: %s\n", player.player_id, colour, message);
+    }
 }
 
 
