@@ -6,6 +6,7 @@
 
 
 #include "game_init.h"
+#include "game_logic.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -106,7 +107,8 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             }
             token = malloc(sizeof(token));
             token->col = players[j].col;
-            board[row][0].stack = token;
+            token->id = players[j].col*10+i; // Assigns a unique id to each token for comparison. The id is formed from the player's colour and the numbered token that is placed. (1-4)
+            add_token_to_square(&board[row][0], token);
         }
     }
 
@@ -142,5 +144,37 @@ void display_message(player player, char message[]){
     }
 }
 
+// Square management functions
+void add_token_to_square(square *sq, token *tok) {
+    if(sq->stack == NULL) {
+        sq->stack = tok;
+    } else {
+        token *curr = sq->stack;
+        while(curr->next != NULL)
+            curr = curr->next;
 
+        curr->next = tok;
+    }
+}
 
+void remove_token_from_square(square *sq, token *tok) {
+    token *prev = sq->stack;
+    token *following;
+    while(prev->next->id != tok->id && prev != NULL) {
+        prev = prev->next;
+    }
+
+    if(prev == NULL) {
+        // TODO: Implement behaviour for it not being found in the square's stack
+    }
+
+    following = prev->next->next;
+
+    prev->next = following; // Skip over the token in the stack to detach it
+    tok->next = NULL; // Detatch "following" from the stack of the now detatched token
+}
+
+void move_token(square *from, square *to, token *tok) {
+    remove_token_from_square(from, tok);
+    add_token_to_square(to, tok);
+}

@@ -41,6 +41,7 @@ typedef struct player {
 //Note each token can be associated with a color
 typedef struct token {
     enum color col;
+    int id; // A unique id to be used for comparison
     struct token *next; // Used for stacking tokens
 } token;
 

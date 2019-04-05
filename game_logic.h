@@ -39,4 +39,24 @@ int dice_roll();
 
 void display_message(player player, char message[]);
 
+/**
+ * Adds a token to a square's stack
+ * @param sq The square to be added to
+ * @param tok The token involved
+ */
 void add_token_to_square(square *sq, token *tok);
+
+/**
+ * Removes a token from a square's stack
+ * @param sq The square to be affected
+ * @param tok The token to be removed
+ */
+void remove_token_from_square(square *sq, token *tok);
+
+/**
+ * Moves a token from one square to another
+ * @param from The square to move the token from
+ * @param to The square to move the token to
+ * @param tok The token to be moved
+ */
+void move_token(square *from, square *to, token *tok);
