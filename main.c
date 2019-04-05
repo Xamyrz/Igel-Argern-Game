@@ -13,6 +13,8 @@
 
 #include "game_init.h"
 #include "game_logic.h"
+#include <time.h>
+#include <stdlib.h>
 
 
 int sample_players(player *players, int num) {
@@ -28,7 +30,8 @@ int sample_players(player *players, int num) {
  * 
  */
 int main(int argc, char** argv) {
-    
+    srand(time(NULL));
+
     //the board is defined as a 2-Dimensional array of squares
     square board[NUM_ROWS][NUM_COLUMNS];
     

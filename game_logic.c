@@ -116,7 +116,6 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
 //dice roll function which creates a random number from 1 to 6 and returns the result
 int dice_roll(){
-    srand(time(NULL));
     int dice = rand()%5+1;
 
     return dice;
