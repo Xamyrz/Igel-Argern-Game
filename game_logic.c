@@ -28,6 +28,16 @@ char print_token(token *t){
     return '\0';
 }
 
+char* colour_to_string(enum color col) {
+    if(col == PINK) return "Pink";
+    if(col == RED) return "Red";
+    if(col == BLUE) return "Blue";
+    if(col == GREEN) return "Green";
+    if(col == ORANGE) return "Orange";
+    if(col == YELLOW) return "Yellow";
+    return NULL;
+}
+
 /*
  * Prints the board
  * 
@@ -64,6 +74,8 @@ void print_board(square board[NUM_ROWS][NUM_COLUMNS]){
     //prints the number of the columns at the end of the board
     printf("     0   1   2   3   4   5   6   7   8\n");
 }
+
+
 
 void printLine(){
   printf("   -------------------------------------\n");  
