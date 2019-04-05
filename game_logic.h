@@ -34,3 +34,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
  * E.g. RED will return "Red"
  */
 char* colour_to_string(enum color col);
+
+int dice_roll();
+
+void display_message(player player, char message);

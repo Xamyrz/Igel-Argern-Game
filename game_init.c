@@ -40,7 +40,8 @@ void initialize_board(square board[NUM_ROWS][NUM_COLUMNS]){
  * Input: the array of players to be initialized
  * Output: The number of players of the game
  */
-int initialize_players(player players[]) {
+int initialize_players(player players[]){
+
     //declares playernum variable
     int playernum;
 

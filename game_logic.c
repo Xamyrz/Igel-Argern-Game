@@ -96,7 +96,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < numPlayers; j++) {
             print_board(board);
-            printf("Player %d: In which row would you like to place a token? \n", players[j].player_id);
+            display_message(players[i], "In which row would you like to place your token? \n");
             scanf("%d", &row);
             while(row > 5 || row <0){
                 print_board(board);
@@ -131,6 +131,10 @@ int dice_roll(){
     int dice = rand()%5+1;
 
     return dice;
+}
+
+void display_message(player player, char message){
+    printf("Player %d %s: %s", player.player_id, colour_to_string(player.col), message);
 }
 
 
