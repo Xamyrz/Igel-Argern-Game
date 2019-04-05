@@ -69,6 +69,8 @@ int initialize_players(player players[]){
         printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
         int colour;
         scanf("%d", &colour);
+
+        //checks if value in the colour_taken is 1, if it is ask the user to input colour again
         while(colour_taken[colour-1] == 1){
             display_message(players[i-1], "You have selected a colour which is already taken");
             display_message(players[i-1], "Please select a colour");
@@ -83,7 +85,11 @@ int initialize_players(player players[]){
             printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
             scanf("%d", &colour);
         }
+
+        //sets the value of colour_taken[colour -1] to 1 when it's free to use.
         colour_taken[colour-1] = 1;
+
+        //sets the players colour
         players[i-1].col = colour - 1;
 
     }
