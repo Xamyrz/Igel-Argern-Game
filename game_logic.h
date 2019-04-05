@@ -27,4 +27,10 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
  */
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers);
 
-
+/**
+ * Converts a colour enum to a string representing the colour
+ * @param col The colour to convert
+ * @return A string representation of the colour.
+ * E.g. RED will return "Red"
+ */
+char* colour_to_string(enum color col);
