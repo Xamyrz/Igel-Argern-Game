@@ -59,14 +59,14 @@ int initialize_players(player players[]){
     for(int i = 1; i<=playernum; i++) {
 
         //assigns an id to a player
-        players[i].player_id = i;
+        players[i-1].player_id = i;
 
         //prompt a user to enter a colour
         printf("Please enter the colour for Player %d \n", players[i].player_id);
         printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
         int colour;
         scanf("%d", &colour);
-        players[i].col = colour - 1;
+        players[i-1].col = colour - 1;
 
         //if the colour id is greater than 6 or less than 1 then display the error and prompt the user again.
         while(colour > 6 || colour < 1){
@@ -74,11 +74,11 @@ int initialize_players(player players[]){
             printf("Please enter the colour for Player %d \n", players[i].player_id);
             printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
             scanf("%d", &colour);
-            players[i].col = colour - 1;
+            players[i-1].col = colour - 1;
         }
     }
         return playernum;
-    }
+}
     
    
      
