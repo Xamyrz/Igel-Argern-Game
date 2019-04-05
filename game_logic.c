@@ -8,6 +8,7 @@
 #include "game_init.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void printLine();
 
@@ -83,8 +84,14 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < numPlayers; j++) {
             print_board(board);
-            printf("Player %d: In which row would you like to place a token? ", players[j].player_id);
+            printf("Player %d: In which row would you like to place a token? \n", players[j].player_id);
             scanf("%d", &row);
+            while(row > 5 || row <0){
+                print_board(board);
+                printf("ERROR: Invalid row \n");
+                printf("Player %d: In which row would you like to place a token? \n", players[j].player_id);
+                scanf("%d", &row);
+            }
             token = malloc(sizeof(token));
             token->col = players[j].col;
             board[row][0].stack = token;
@@ -104,6 +111,15 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
     //TO BE IMPLEMENTED
+}
+
+
+//dice roll function which creates a random number from 1 to 6 and returns the result
+int dice_roll(){
+    srand(time(NULL));
+    int dice = rand()%5+1;
+
+    return dice;
 }
 
 
