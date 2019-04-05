@@ -45,6 +45,8 @@ int initialize_players(player players[]){
     //declares playernum variable
     int playernum;
 
+    int colour_taken[] = {0,0,0,0,0,0};
+
     //prompts user to enter amount of players
     printf("How many players are going to play? \n");
     scanf("%d", &playernum);
@@ -67,16 +69,23 @@ int initialize_players(player players[]){
         printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
         int colour;
         scanf("%d", &colour);
-        players[i-1].col = colour - 1;
-
-        //if the colour id is greater than 6 or less than 1 then display the error and prompt the user again.
-        while(colour > 6 || colour < 1){
-            display_message(players[i-1], "You entered an invalid colour! Please try again.");
+        while(colour_taken[colour-1] == 1){
+            display_message(players[i-1], "You have selected a colour which is already taken");
             display_message(players[i-1], "Please select a colour");
             printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
             scanf("%d", &colour);
-            players[i-1].col = colour - 1;
         }
+
+        //if the colour id is greater than 6 or less than 1 then display the error and prompt the user again.
+        while(colour > 6 || colour < 1){
+            display_message(players[i-1], "Yo6u entered an invalid colour! Please try again.");
+            display_message(players[i-1], "Please select a colour");
+            printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
+            scanf("%d", &colour);
+        }
+        colour_taken[colour-1] = 1;
+        players[i-1].col = colour - 1;
+
     }
         return playernum;
 }
