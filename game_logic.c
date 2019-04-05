@@ -149,11 +149,9 @@ void add_token_to_square(square *sq, token *tok) {
     if(sq->stack == NULL) {
         sq->stack = tok;
     } else {
-        token *curr = sq->stack;
-        while(curr->next != NULL)
-            curr = curr->next;
-
-        curr->next = tok;
+        token *prev = sq->stack;
+        sq->stack = tok;
+        tok->next = prev;
     }
 }
 
