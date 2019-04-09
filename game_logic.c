@@ -138,9 +138,9 @@ int dice_roll(){
 void display_message(player player, char message[]){
     char *colour = colour_to_string(player.col);
     if(colour == NULL) {
-        printf("Player %d: %s\n", player.player_id, message);
-    } else {
-        printf("Player %d [%s]: %s\n", player.player_id, colour, message);
+        printf("Player %d : %s\n", player.player_id, message);
+    }else{
+        printf("Player %d [%s] [%s]: %s\n", player.player_id, player.playername, colour, message);
     }
 }
 

@@ -33,6 +33,7 @@ enum color {
  * such as a name and a color.
  */
 typedef struct player {
+    char playername[20];
     int player_id;
     enum color col;
 } player;
