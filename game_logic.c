@@ -124,7 +124,9 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
  */
 
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
-    //TO BE IMPLEMENTED
+    for(int i = 0; i < numPlayers; i++) {
+        side_step(board, players[i]);
+    }
 }
 
 
@@ -138,9 +140,9 @@ int dice_roll(){
 void display_message(player player, char message[]){
     char *colour = colour_to_string(player.col);
     if(colour == NULL) {
-        printf("Player %d : %s\n", player.player_id, message);
+        printf("Player %d: %s\n", player.player_id, message);
     }else{
-        printf("Player %d [%s] [%s]: %s\n", player.player_id, player.playername, colour, message);
+        printf("%s [%s]: %s\n", player.playername, colour, message);
     }
 }
 
@@ -191,4 +193,64 @@ int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column)
 
     // By this stage we've verified that all preceding columns don't contain a token, so we can safely return 1
     return 1;
+}
+
+void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
+    char c;
+    int row, column;
+    display_message(player, "Would you like to move one of your tokens?");
+    printf("Enter y for yes, else for no\n");
+    scanf(" %c", &c);
+
+    if(c == 'y' || c == 'Y') {
+        display_message(player, "Please enter the token you wish to move in the following form: \"[row], [column]\"");
+        scanf(" %d, %d", &row, &column);
+
+        while(row < 0 || row > NUM_ROWS || column < 0 || column > NUM_COLUMNS) {
+            display_message(player, "Invalid co-ordinate, please try again.");
+            scanf(" %d, %d", &row, &column);
+        }
+
+        token tok = *board[row][column].stack;
+
+        if(tok.col != player.col) {
+            display_message(player, "Token belongs to another player");
+            side_step(board, player); // Send it back to the function again
+            return; // Return once that function returns to avoid duplication of work
+        }
+
+        if(!can_move_from_cell(board, row, column)) {
+            display_message(player, "Token cannot be moved due to it being in an obstacle");
+            side_step(board, player); // Send it back to the function again
+            return; // Return once that function returns to avoid duplication of work
+        }
+
+        display_message(player, "Would you like to move the token up or down?\n Enter u for up or d for down.");
+        scanf(" %c", &c);
+
+        while(c != 'u' && c != 'd') {
+            display_message(player, "Invalid choice, please enter either u or d.");
+            scanf(" %c", &c);
+        }
+
+        if(c == 'u') {
+            if(row != 0) {
+                // If u was entered move the token up, assuming this doesn't move it out of bounds
+                move_token(&board[row][column], &board[row - 1][column], &tok);
+            } else {
+                display_message(player, "Move would send token out of bounds");
+                side_step(board, player); // Send it back to the function again
+                return; // Return once that function returns to avoid duplication of work
+            }
+        } else {
+            if(row != NUM_ROWS) {
+                // If u was entered move the token up, assuming this doesn't move it out of bounds
+                move_token(&board[row][column], &board[row + 1][column], &tok);
+            } else {
+                display_message(player, "Move would send token out of bounds");
+                side_step(board, player); // Send it back to the function again
+                return; // Return once that function returns to avoid duplication of work
+            }
+        }
+    }
 }
