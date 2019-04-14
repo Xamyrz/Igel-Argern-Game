@@ -126,6 +126,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
     for(int i = 0; i < numPlayers; i++) {
         side_step(board, players[i]);
+        print_board(board);
     }
 }
 
