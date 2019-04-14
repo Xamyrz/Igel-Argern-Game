@@ -211,9 +211,15 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
             scanf(" %d, %d", &row, &column);
         }
 
-        token tok = *board[row][column].stack;
+        token *tok = board[row][column].stack;
 
-        if(tok.col != player.col) {
+        if(tok == NULL) {
+            display_message(player, "No token in that square.");
+            side_step(board, player); // Send it back to the function again
+            return; // Return once that function returns to avoid duplication of work
+        }
+
+        if(tok->col != player.col) {
             display_message(player, "Token belongs to another player");
             side_step(board, player); // Send it back to the function again
             return; // Return once that function returns to avoid duplication of work
@@ -236,7 +242,7 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
         if(c == 'u') {
             if(row != 0) {
                 // If u was entered move the token up, assuming this doesn't move it out of bounds
-                move_token(&board[row][column], &board[row - 1][column], &tok);
+                move_token(&board[row][column], &board[row - 1][column], tok);
             } else {
                 display_message(player, "Move would send token out of bounds");
                 side_step(board, player); // Send it back to the function again
@@ -245,7 +251,7 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
         } else {
             if(row != NUM_ROWS) {
                 // If u was entered move the token up, assuming this doesn't move it out of bounds
-                move_token(&board[row][column], &board[row + 1][column], &tok);
+                move_token(&board[row][column], &board[row + 1][column], tok);
             } else {
                 display_message(player, "Move would send token out of bounds");
                 side_step(board, player); // Send it back to the function again
