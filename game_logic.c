@@ -157,25 +157,12 @@ void add_token_to_square(square *sq, token *tok) {
     }
 }
 
-void remove_token_from_square(square *sq, token *tok) {
-    token *prev = sq->stack;
-    token *following;
-    while(prev->next->id != tok->id && prev != NULL) {
-        prev = prev->next;
-    }
-
-    if(prev == NULL) {
-        // TODO: Implement behaviour for it not being found in the square's stack
-    }
-
-    following = prev->next->next;
-
-    prev->next = following; // Skip over the token in the stack to detach it
-    tok->next = NULL; // Detatch "following" from the stack of the now detatched token
+void pop_from_top_of_square(square *sq) {
+    sq->stack = sq->stack->next;
 }
 
 void move_token(square *from, square *to, token *tok) {
-    remove_token_from_square(from, tok);
+    pop_from_top_of_square(from);
     add_token_to_square(to, tok);
 }
 
