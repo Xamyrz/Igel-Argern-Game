@@ -176,3 +176,19 @@ void move_token(square *from, square *to, token *tok) {
     remove_token_from_square(from, tok);
     add_token_to_square(to, tok);
 }
+
+int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column) {
+    if(board[row][column].type == NORMAL)
+        return 1;
+
+    // Checks all preceding columns to check if they contain a token, if they do, return 0
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < (column - 1); j++) {
+            if(board[row][column].stack != NULL)
+                return 0;
+        }
+    }
+
+    // By this stage we've verified that all preceding columns don't contain a token, so we can safely return 1
+    return 1;
+}

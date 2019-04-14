@@ -60,3 +60,19 @@ void remove_token_from_square(square *sq, token *tok);
  * @param tok The token to be moved
  */
 void move_token(square *from, square *to, token *tok);
+
+/**
+ * To be called during the forward stepping period of the game
+ */
+void side_step();
+
+/**
+ * To be called during the side stepping period of the game
+ */
+void forward_step();
+
+/**
+ * Checks if a token is legally allowed to move from its current position
+ * @return 1 if cell is not an obstacle or all other tokens have caught up, 0 otherwise
+ */
+int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column);
