@@ -183,6 +183,15 @@ int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column)
     return 1;
 }
 
+int has_any_player_won(player players[], int num_players) {
+    for(int i = 0; i < num_players; i++) {
+        if(players[i].num_tokens_at_end == 3)
+            return i;
+    }
+
+    return -1;
+}
+
 void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
     char c;
     int row, column;

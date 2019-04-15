@@ -64,7 +64,7 @@ void move_token(square *from, square *to, token *tok)
 /**
  * To be called during the forward stepping period of the game
  */
-void side_step();
+void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player);
 
 /**
  * To be called during the side stepping period of the game
@@ -76,3 +76,11 @@ void forward_step();
  * @return 1 if cell is not an obstacle or all other tokens have caught up, 0 otherwise
  */
 int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column);
+
+/**
+ * Checks if any player has won the game yet
+ * @param players[] The array of players in the game
+ * @param num_players The number of initialised players in the game
+ * @return The player that has won, if no player won then the function returns -1
+ */
+int has_any_player_won(player players[], int num_players);
