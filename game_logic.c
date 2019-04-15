@@ -122,18 +122,26 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
  *        players - the array of the players
  *        numPlayers - the number of players  
  */
-
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
-    for(int i = 0; i < numPlayers; i++) {
-        side_step(board, players[i]);
+    int dice_roll;
+    int curr_player = 0;
+
+    while(!has_any_player_won(players, numPlayers)) {
+        dice_roll = dice_roll();
+        printf("%d has been rolled\n", dice_roll);
+        side_step(board, players[curr_player]);
         print_board(board);
+
+        curr_player++;
+        if(curr_player == numPlayers)
+            curr_player = 0; //Wrap back around once curr_player reaches the max
     }
 }
 
 
 //dice roll function which creates a random number from 1 to 6 and returns the result
-int dice_roll(){
-    int dice = rand()%5+1;
+int dice_roll() {
+    int dice = rand()%5;
 
     return dice;
 }

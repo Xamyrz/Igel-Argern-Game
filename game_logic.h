@@ -59,7 +59,7 @@ void pop_from_top_of_square(square *sq);
  * @param to The square to move the token to
  * @param tok The token to be moved
  */
-void move_token(square *from, square *to, token *tok)
+void move_token(square *from, square *to, token *tok);
 
 /**
  * To be called during the forward stepping period of the game
