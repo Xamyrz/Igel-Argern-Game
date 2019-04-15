@@ -125,8 +125,9 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers){
     int dice_roll;
     int curr_player = 0;
+    int winner;
 
-    while(!has_any_player_won(players, numPlayers)) {
+    do {
         dice_roll = roll_dice();
         printf("%d has been rolled\n", dice_roll);
         side_step(board, players[curr_player]);
@@ -135,7 +136,9 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
         curr_player++;
         if(curr_player == numPlayers)
             curr_player = 0; //Wrap back around once curr_player reaches the max
-    }
+
+        winner = has_any_player_won(players, numPlayers);
+    } while (winner == -1);
 }
 
 
