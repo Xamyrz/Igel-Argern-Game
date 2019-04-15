@@ -95,7 +95,7 @@ int initialize_players(player players[]){
 
         //sets the players colour
         players[i-1].col = colour - 1;
-
+        players[i-1].num_tokens_at_end = 0;
     }
         return playernum;
 }

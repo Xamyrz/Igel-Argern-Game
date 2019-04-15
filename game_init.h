@@ -36,6 +36,7 @@ typedef struct player {
     char playername[20];
     int player_id;
     enum color col;
+    int num_tokens_at_end;
 } player;
 
 //defines a token.
