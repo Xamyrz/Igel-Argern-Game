@@ -127,7 +127,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     int curr_player = 0;
 
     while(!has_any_player_won(players, numPlayers)) {
-        dice_roll = dice_roll();
+        dice_roll = roll_dice();
         printf("%d has been rolled\n", dice_roll);
         side_step(board, players[curr_player]);
         print_board(board);
@@ -140,7 +140,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
 
 //dice roll function which creates a random number from 1 to 6 and returns the result
-int dice_roll() {
+int roll_dice() {
     int dice = rand()%5;
 
     return dice;

@@ -35,7 +35,7 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
  */
 char* colour_to_string(enum color col);
 
-int dice_roll();
+int roll_dice();
 
 void display_message(player player, char message[]);
 
