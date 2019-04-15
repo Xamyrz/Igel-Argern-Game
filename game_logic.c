@@ -265,3 +265,25 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
         }
     }
 }
+
+void forward_move(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
+    for(int i=0; i<9;i++){
+        if(board[roll][i].stack == NULL){
+            display_message(player, "Unfortunately there are no tokens in that column");
+            return;
+        }
+        else{
+            char *message = malloc(sizeof(char) * 25);
+            int choice, column;
+            sprintf(message, "Please select a column from row %d to move token forward", roll);
+            display_message(player, message);
+            scanf("%d", &column);
+            while(board[roll][choice].stack == NULL){
+                display_message(player, "Unfortunately there is no token in that column \n please re-enter column");
+                scanf("%d", &column);
+            }
+            token *tok = board[roll][choice].stack;
+            move_token(&board[roll][column], &board[roll][choice + 1], tok);
+        }
+    }
+}
