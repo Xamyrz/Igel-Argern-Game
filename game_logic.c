@@ -128,6 +128,8 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
     int winner;
 
     do {
+        printf("NEW ROUND\n");
+        print_board(board);
         dice_roll = roll_dice();
         printf("%d has been rolled\n", dice_roll);
         side_step(board, players[curr_player]);
