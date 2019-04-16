@@ -184,7 +184,9 @@ void pop_from_top_of_square(square *sq) {
 
 void move_token(square *from, square *to, token *tok) {
     pop_from_top_of_square(from);
+    printf("Popped from stack!\n");
     add_token_to_square(to, tok);
+    printf("Added to square\n");
 }
 
 int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column) {
@@ -295,8 +297,8 @@ void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
                 scanf(" %d", &column);
             }
             printf("column: %d roll: %d", column, roll);
-            token *tok = board[roll][column].stack;
-            move_token(&board[roll][column], &board[roll][column + 1], tok);
+            move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack);
+            return;
         }
     }
 }
