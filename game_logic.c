@@ -92,6 +92,8 @@ void printLine(){
 void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPlayers) {
     int row;
     struct token *token;
+    int num_tokens_placed = 0;
+    int rows_placed_in[] = {0,0,0,0,0,0}; // Array to keep track of number of tokens in each row
 
     // Loop 4 times, once per token
     for(int i = 0; i < 4; i++) {
@@ -99,16 +101,20 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             print_board(board);
             display_message(players[j], "In which row would you like to place your token?");
             scanf("%d", &row);
-            while(row > 5 || row <0){
+
+            while(row > 5 || row <0 || rows_placed_in[row] > num_tokens_placed/NUM_ROWS){
                 print_board(board);
-                display_message(players[j], "Row number is out of bounds! Please try again.");
+                display_message(players[j], "Row number is out of bounds or contains too many tokens! Please try again.");
                 display_message(players[j], "In which row would you like to place your token?");
                 scanf("%d", &row);
             }
+
             token = malloc(sizeof(struct token));
             token->col = players[j].col;
             token->id = players[j].col*10+i; // Assigns a unique id to each token for comparison. The id is formed from the player's colour and the numbered token that is placed. (1-4)
             add_token_to_square(&board[row][0], token);
+            rows_placed_in[row]++;
+            num_tokens_placed++;
         }
     }
 
