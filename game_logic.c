@@ -286,19 +286,16 @@ void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
             display_message(player, "Unfortunately there are no tokens in that column");
             return;
         }
-        else{
-            char *message = malloc(sizeof(char) * 25);
-            int column;
-            sprintf(message, "Please select a column from row %d to move token forward", roll);
-            display_message(player, message);
-            scanf(" %d", &column);
-            while(board[roll][column].stack == NULL){
-                display_message(player, "Unfortunately there is no token in that column \n please re-enter column");
-                scanf(" %d", &column);
-            }
-            printf("column: %d roll: %d", column, roll);
-            move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack);
-            return;
-        }
     }
+    char *message = malloc(sizeof(char) * 25);
+    int column;
+    sprintf(message, "Please select a column from row %d to move token forward", roll);
+    display_message(player, message);
+    scanf(" %d", &column);
+    while(board[roll][column].stack == NULL){
+        display_message(player, "Unfortunately there is no token in that column \n please re-enter column");
+        scanf(" %d", &column);
+    }
+    printf("column: %d roll: %d", column, roll);
+    move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack);
 }
