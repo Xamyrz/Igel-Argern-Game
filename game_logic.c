@@ -111,6 +111,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
 
             token = malloc(sizeof(struct token));
             token->col = players[j].col;
+            token->next = NULL;
             token->id = players[j].col*10+i; // Assigns a unique id to each token for comparison. The id is formed from the player's colour and the numbered token that is placed. (1-4)
             add_token_to_square(&board[row][0], token);
             rows_placed_in[row]++;
