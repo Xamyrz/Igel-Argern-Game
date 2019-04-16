@@ -69,7 +69,7 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player);
 /**
  * To be called during the side stepping period of the game
  */
-void forward_step();
+void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll);
 
 /**
  * Checks if a token is legally allowed to move from its current position
