@@ -70,7 +70,7 @@ int initialize_players(player players[]){
 
         //prompt a user to enter a colour
         display_message(players[i-1], "Please select a colour");
-        printf("1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
+        printf("\033[0;31m1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
         int colour;
         scanf("%d", &colour);
 

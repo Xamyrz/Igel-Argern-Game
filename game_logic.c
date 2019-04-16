@@ -281,11 +281,15 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
 }
 
 void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
+    int count = 0;
     for(int i=0; i<9;i++){
         if(board[roll][i].stack == NULL){
-            display_message(player, "Unfortunately there are no tokens in that column");
-            return;
+            count++;
         }
+    }
+    if(count == 0){
+        display_message(player, "Unfortunately there are no tokens in that column");
+        return;
     }
     char *message = malloc(sizeof(char) * 25);
     int column;
