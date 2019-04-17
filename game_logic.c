@@ -292,7 +292,7 @@ void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
         display_message(player, "Unfortunately there are no tokens in that column");
         return;
     }
-    char *message = malloc(sizeof(char) * 25);
+    char *message = malloc(sizeof(char) * 56);
     int column;
     sprintf(message, "Please select a column from row %d to move token forward", roll);
     display_message(player, message);

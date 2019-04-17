@@ -37,6 +37,10 @@ int main(int argc, char** argv) {
     
     //an array containing the players (MAX 6 players)
     player players[6];
+
+    for(int i=0; i<6; i++) {
+        players[i].col = NONE;
+    }
     
     //the number of players
     int numPlayers = 0;

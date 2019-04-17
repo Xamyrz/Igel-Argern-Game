@@ -24,7 +24,7 @@ enum stype {
 
 //colors of tokens
 enum color {
-    RED, BLUE, GREEN, YELLOW, PINK, ORANGE
+    RED, BLUE, GREEN, YELLOW, PINK, ORANGE, NONE
 };
 
 /*
