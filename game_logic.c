@@ -301,6 +301,11 @@ void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
         display_message(player, "Unfortunately there is no token in that column \n please re-enter column");
         scanf(" %d", &column);
     }
+    if(!can_move_from_cell(board, roll, column)) {
+        display_message(player, "Token cannot be moved due to it being in an obstacle");
+        forward_step(board, player, roll); // Send it back to the function again
+        return; // Return once that function returns to avoid duplication of work
+    }
     printf("column: %d roll: %d", column, roll);
     move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack);
 }
