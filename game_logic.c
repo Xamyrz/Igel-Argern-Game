@@ -180,11 +180,9 @@ void add_token_to_square(square *sq, token *tok) {
 }
 
 void pop_from_top_of_square(square *sq) {
-    printf("Pre pop stack depth: %d\n", count_stack_depth(sq));
     token *to_pop = sq->stack;
     sq->stack = to_pop->next;
     to_pop->next = NULL;
-    printf("Post pop stack depth: %d\n", count_stack_depth(sq));
 }
 
 void move_token(square *from, square *to, token *tok) {
