@@ -180,7 +180,11 @@ void add_token_to_square(square *sq, token *tok) {
 }
 
 void pop_from_top_of_square(square *sq) {
-    sq->stack = sq->stack->next;
+    printf("Pre pop stack depth: %d\n", count_stack_depth(sq));
+    token *to_pop = sq->stack;
+    sq->stack = to_pop->next;
+    to_pop->next = NULL;
+    printf("Post pop stack depth: %d\n", count_stack_depth(sq));
 }
 
 void move_token(square *from, square *to, token *tok) {
@@ -284,7 +288,7 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
 void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
     int count = 0;
     for(int i=0; i<9;i++){
-        if(board[roll][i].stack == NULL){
+        if(board[roll][i].stack != NULL){
             count++;
         }
     }
