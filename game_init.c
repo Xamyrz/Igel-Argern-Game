@@ -44,7 +44,6 @@ int initialize_players(player players[]){
 
     //declares playernum variable
     int playernum;
-
     int colour_taken[] = {0,0,0,0,0,0};
 
     //prompts user to enter amount of players
@@ -70,7 +69,7 @@ int initialize_players(player players[]){
 
         //prompt a user to enter a colour
         display_message(players[i-1], "Please select a colour");
-        printf("\033[0;31m1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
+        printf("\n1)Red \n2)Blue \n3)Green \n4)Yellow \n5)Pink \n6)Orange \n");
         int colour;
         scanf("%d", &colour);
 

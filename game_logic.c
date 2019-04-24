@@ -284,30 +284,42 @@ void side_step(square board[NUM_ROWS][NUM_COLUMNS], player player) {
 }
 
 void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
+    //declares variables and sets them to 0
     int count = 0;
+    int can_move = 0;
+    int cant_move = 0;
     for(int i=0; i<9;i++){
-        if(board[roll][i].stack != NULL){
-            count++;
+        if(board[roll][i].stack != NULL){ //increments by 1 to count if there is a token in the row
+            count++; //increments by 1
+        }
+        if(!can_move_from_cell(board, roll, i) && board[roll][i].stack != NULL) { //check if there is a token in the row that can't be moved
+            cant_move++; //if so increment cant_move by 1
+        }
+        else if(can_move_from_cell(board, roll, i) && board[roll][i].stack != NULL){ //else if there is a token in the row that can be moved
+            can_move++; //if so increment can_move by 1
         }
     }
-    if(count == 0){
-        display_message(player, "Unfortunately there are no tokens in that column");
+    if(cant_move != 0 && can_move == 0){ //if there is only one token available in the row, but it's stuck in obstacle, move to next player
+        display_message(player, "Unfortunately there are no tokens available to move forward in this row \n");
         return;
     }
-    char *message = malloc(sizeof(char) * 56);
-    int column;
-    sprintf(message, "Please select a column from row %d to move token forward", roll);
-    display_message(player, message);
-    scanf(" %d", &column);
-    while(board[roll][column].stack == NULL){
-        display_message(player, "Unfortunately there is no token in that column \n please re-enter column");
+    if(count == 0){ //if count is 0 then return and display that there are no tokens in that row
+        display_message(player, "Unfortunately there are no tokens in that row");
+        return;
+    }
+    char *message = malloc(sizeof(char) * 56); //allocates memory to message variable
+    int column; //declares column variable
+    sprintf(message, "Please select a column from row %d to move token forward", roll); //adds the message to message variable
+    display_message(player, message); //displays the message
+    scanf(" %d", &column); //prompts user to enter the column of the token
+    while(board[roll][column].stack == NULL){ //if there are no tokens in the column, prompt user to re-enter the column
+        display_message(player, "Unfortunately there is no token in that column \nplease re-enter column");
         scanf(" %d", &column);
     }
-    if(!can_move_from_cell(board, roll, column)) {
+    if(!can_move_from_cell(board, roll, column)) { //if token can't be moved because of an obstacle
         display_message(player, "Token cannot be moved due to it being in an obstacle");
         forward_step(board, player, roll); // Send it back to the function again
         return; // Return once that function returns to avoid duplication of work
     }
-    printf("column: %d roll: %d", column, roll);
-    move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack);
+    move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack); //moves the token forward
 }
