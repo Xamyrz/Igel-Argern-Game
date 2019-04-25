@@ -102,7 +102,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             display_message(players[j], "In which row would you like to place your token?");
             scanf("%d", &row);
 
-            while(row > 5 || row <0 || rows_placed_in[row] > num_tokens_placed/NUM_ROWS){
+            while(row > 5 || row < 0 || rows_placed_in[row] > num_tokens_placed/NUM_ROWS){
                 print_board(board);
                 display_message(players[j], "Row number is out of bounds or contains too many tokens! Please try again.");
                 display_message(players[j], "In which row would you like to place your token?");
@@ -113,7 +113,7 @@ void place_tokens(square board[NUM_ROWS][NUM_COLUMNS], player players[], int num
             token->col = players[j].col;
             token->next = NULL;
             token->p = &players[j];
-            add_token_to_square(&board[row][7], token);
+            add_token_to_square(&board[row][0], token);
             rows_placed_in[row]++;
             num_tokens_placed++;
         }
@@ -190,9 +190,7 @@ void pop_from_top_of_square(square *sq) {
 
 void move_token(square *from, square *to, token *tok) {
     pop_from_top_of_square(from);
-    printf("Popped from stack!\n");
     add_token_to_square(to, tok);
-    printf("Added to square\n");
 }
 
 int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column) {
