@@ -291,7 +291,7 @@ void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
     int count = 0;
     int can_move = 0;
     int cant_move = 0;
-    for(int i=0; i<9;i++){
+    for(int i=0; i<8;i++){ // Has to be less than 8 because you can't move tokens in the last row
         if(board[roll][i].stack != NULL){ //increments by 1 to count if there is a token in the row
             count++; //increments by 1
         }
