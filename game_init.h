@@ -44,6 +44,7 @@ typedef struct player {
 typedef struct token {
     enum color col;
     struct token *next; // Used for stacking tokens
+    struct player *p;
 } token;
 
 //Defines a square of the board.
