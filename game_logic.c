@@ -197,7 +197,7 @@ int can_move_from_cell(square board[NUM_ROWS][NUM_COLUMNS], int row, int column)
         return 1;
 
     // Checks all preceding columns to check if they contain a token, if they do, return 0
-    for(int i = 0; i < row; i++) {
+    for(int i = 0; i < NUM_ROWS; i++) {
         for(int j = 0; j < (column - 1); j++) {
             if(board[row][column].stack != NULL)
                 return 0;
