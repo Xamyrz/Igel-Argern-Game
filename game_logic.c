@@ -325,4 +325,7 @@ void forward_step(square board[NUM_ROWS][NUM_COLUMNS], player player, int roll){
         return; // Return once that function returns to avoid duplication of work
     }
     move_token(&board[roll][column], &board[roll][column + 1], board[roll][column].stack); //moves the token forward
+    if(column+1 == 8) {
+        board[roll][column+1].stack->p->num_tokens_at_end++;
+    }
 }
