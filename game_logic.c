@@ -149,6 +149,9 @@ void play_game(square board[NUM_ROWS][NUM_COLUMNS], player players[], int numPla
 
         winner = has_any_player_won(players, numPlayers);
     } while (winner == -1);
+
+    printf("\n\nWE HAVE A WINNER\n");
+    display_message(players[winner], "You have won!");
 }
 
 
